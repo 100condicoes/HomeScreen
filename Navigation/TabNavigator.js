@@ -16,6 +16,7 @@ function MyTabs() {
     labeled={false} 
     initialRouteName="Home"
     screenOptions={({ route }) => ({
+        headerShown: false,
         tabBarIcon: ({ focused, color, size }) => {
             let iconName;
             if (route.name === 'Home') {
@@ -36,10 +37,10 @@ function MyTabs() {
         activeTintColor: 'tomato',
         inactiveTintColor: 'gray',
     }}>
-      <Tab.Screen name="Ligacoes" component={Ligacoes} />
-      <Tab.Screen name="Emergencia"component={Emergencia} />
-      <Tab.Screen name="Information" component={Information} />
-      <Tab.Screen name="Home" component={Home} />
+      <Tab.Screen name="Ligacoes" component={Ligacoes}  options={{ unmountOnBlur: true }}/>
+      <Tab.Screen name="Emergencia"component={Emergencia}  options={{ unmountOnBlur: true }}/>
+      <Tab.Screen name="Information" component={Information}  options={{ unmountOnBlur: true }}/>
+      <Tab.Screen name="Home" component={Home}  options={{ unmountOnBlur: true }}/>
     </Tab.Navigator>
   );
 }

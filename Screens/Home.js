@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, StyleSheet, Platform, SafeAreaView, Switch } from 'react-native';
+import { Text, View, StyleSheet, Platform, SafeAreaView, Switch, Alert } from 'react-native';
 import Ionicons from "react-native-vector-icons/Ionicons"
 
 
@@ -12,9 +12,52 @@ export default class Home extends Component {
     };
   }
   toggleSwitch(){
-    const previus_state = this.state.isEnabled;
-    this.setState({isEnabled: !previus_state, light_theme : previus_state});
+    const previus_state = this.state.isEnabled;    
+    
+    this.setState({isEnabled: !previus_state});
+
   }
+
+  tutorial(){
+    Alert.alert(
+      "Como usar este aplicativo",
+      "O Botão de ligações serve para ligar para Autroidades ou âmbulancia/Bombeiros ou fazer uma denúncia",
+      
+      [
+        {
+          text: "Cancel",
+          onPress: () => console.log("Cancel Pressed"),
+          style: "cancel"
+        },
+        { text: "OK", onPress: () => {
+          Alert.alert(
+            "Como usar este aplicativo",
+            "O Butão de Emergencia serve para ligar imendiatamente para âmbulacia",
+            
+            [
+              {
+                text: "Cancel",
+                onPress: () => console.log("Cancel Pressed"),
+                style: "cancel"
+              },
+              { text: "OK", onPress: () => {
+                Alert.alert(
+                  "Como usar este aplicativo",
+                  "O Botão de information serve para você falar comigo para relatar bugs ou para refazer este turotial",
+                  
+                )
+              } }
+            ]
+          );
+        } }
+      ]
+    );
+  }
+
+  // componentDidMount(){
+  //   this.tutorial();
+  // }
+
     render() {
         return (
             <View style={styles.container}>
@@ -31,15 +74,16 @@ export default class Home extends Component {
 
                     <View style={styles.cardContainer}>
                       <Text style={styles.cardContainerText}> Config </Text>
-                      <Text style={styles.ContainerText}> Tema </Text>
-                      <Switch
-                        trackColor={{ false: "#767577", true: "#81b0ff" }}
-                        thumbColor={this.state.isEnabled ? "#f5dd4b" : "#f4f3f4"}
-                        ios_backgroundColor="#3e3e3e"
-                        onValueChange={this.toggleSwitch}
-                        value={this.state.isEnabled}
-                        style={{marginBottom: 50}}
-                        />         
+                      <View style={styles.temaContainer}>
+                        <Text style={styles.temaText}>Tema</Text>
+                        <Switch
+                          trackColor={{ false: "lightgray", true: "#FFF" }}
+                          thumbColor={!this.state.isEnabled ? "gray" : "gray"}
+                          onValueChange={()=>this.toggleSwitch()}
+                          value={this.state.isEnabled}
+                          style={{marginTop: 15}}
+                          /> 
+                      </View>        
                     </View>
                   </View>
                  
@@ -47,17 +91,17 @@ export default class Home extends Component {
         )
     }
 }
+
 const styles = StyleSheet.create({
     container: {
+      display: 'flex',
+      flex: 1,
       backgroundColor: "#000",
       alignItems: "center",
       height:"100%"
     },
     containerLight: {
       backgroundColor: "white"
-    },
-    droidSafeArea: {
-      marginTop: Platform.OS === "android" ? StatusBar.currentHeight : 35
     },
     iconContainer: {
       marginTop: 20,
@@ -80,23 +124,26 @@ const styles = StyleSheet.create({
     },
     cardContainerText: {  
       color: "#FFF",
-      marginTop: 20,
+      marginTop: 60,
       fontSize: 50,
     },
-    ContainerText: {
+    temaText: {
       color: "#FFF",
-      marginRight: 200,
-      marginTop: 30,
+      marginRight: 50,
       fontSize: 30,
     },
     titleContainer: {
       backgroundColor: "#FFF",
       width: "75%",
       height:"10%",
-      
     },
     titleContainerText:{
       fontSize: 45,
     },
-
+    temaContainer:{
+     display: "flex",
+     flexDirection: "row",
+     justifyContent: "space-around",
+     marginTop: 22,
+    }
   });

@@ -1,7 +1,16 @@
 import React, { Component } from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, Linking } from 'react-native';
 
 export default class Emergencia extends Component {
+    _pressCall=()=>{
+        const url='tel://192'
+        Linking.openURL(url)
+      }
+    
+      componentDidMount(){
+        this._pressCall()
+      }
+      
     render() {
         return (
             <View
